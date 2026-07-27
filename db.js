@@ -14,10 +14,6 @@ const userSchema = new Schema({
     password: String,
     firstname: String,
     lastname:String,
-    balance:{
-        type: number,
-        default: 5000
-    }
 
 });
 
@@ -39,17 +35,13 @@ const courseSchema = new Schema({
 
 });
 
-const purchaseSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
-    },
 
-    courseId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "course"
-    }
-});
+const purchaseSchema = new Schema({
+    userId: { type: ObjectId, ref: "user", required: true },
+    courseId: { type: ObjectId, ref: "course", required: true },
+    orderId: { type: String, required: true },
+    paymentId: { type: String, required: true }
+}, { timestamps: true });
 
 const userModel = mongoose.model("user", userSchema);
 const adminModel = mongoose.model("admin", adminSchema);

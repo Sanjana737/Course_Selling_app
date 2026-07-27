@@ -77,23 +77,6 @@ userrouter.get("/purchases",userMiddlewear,async function(req,res){
     });
 });
 
-userrouter.get("/balance",userMiddlewear, async function(req,res){
-    const user = await userModel.findById(req.userId)
-    res.json({
-        balance: user.balance
-    });
-});
-
-userrouter.post("/add-balance",userMiddlewear,async function(req,res){
-    const amount = Number(req.body.amount)
-    const user = await userModel.findById(req.userId)
-    user.balance+=amount
-    await user.save();
-    res.json({
-        balance : user.balance
-    });
-});
-
 module.exports = {
     userrouter: userrouter
 }
